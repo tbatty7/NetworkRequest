@@ -12,6 +12,8 @@ class ViewController: UIViewController {
     
     private var dataTask: URLSessionDataTask?
     
+    var session = URLSession.shared
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -26,7 +28,7 @@ class ViewController: UIViewController {
                 let url = URL(string: "https://itunes.apple.com/search?" + "mediaType=book&term=\(encodedTerms)")
         else { return }
         let request = URLRequest(url: url)//                    The dataTask method takes 2 arguments, the request and a closure that takes 3 args
-        dataTask = URLSession.shared.dataTask(with: request) {
+        dataTask = session.dataTask(with: request) {
             [weak self] (data: Data?, response: URLResponse?, error: Error?) -> Void in //    [weak self] is a weak capture group to prevent memory leak.
             guard let self = self else { return } //                        Capture group turns self into an optional, this guard clause unwraps it
             
