@@ -31,7 +31,7 @@ class MockUrlSession: URLSessionProtocol {
         XCTAssertEqual(dataTaskArgsRequest.first, request, "request", file: file, line: line)
     }
     
-    private func dataTaskWasCalledOnce(file: StaticString = #file, line: UInt = #line) -> Bool {
+    private func dataTaskWasCalledOnce(file: StaticString, line: UInt) -> Bool {
         verifyMethodCallOnce(methodName: "dataTask(with:completionHandler:)", callCount: dataTaskCallCount, describeArgument: "request: \(dataTaskArgsRequest)", namedFile: file, line: line)
     }
 }
@@ -42,7 +42,7 @@ private class DummyUrlSessionDataTask: URLSessionDataTask {
     }
 }
 
-func verifyMethodCallOnce(methodName: String, callCount: Int, describeArgument: @autoclosure () -> String, namedFile: StaticString = #file, line: UInt = #line) -> Bool {
+func verifyMethodCallOnce(methodName: String, callCount: Int, describeArgument: @autoclosure () -> String, namedFile: StaticString, line: UInt) -> Bool {
     if callCount == 0 {
         XCTFail("Wanted but not invoked \(methodName)", file: namedFile, line: line)
         return false
