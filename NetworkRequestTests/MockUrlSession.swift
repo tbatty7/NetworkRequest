@@ -23,9 +23,9 @@ class MockUrlSession: URLSessionProtocol {
         return DummyUrlSessionDataTask()
     }
     
-    func verifyDataTask(with request: URLRequest) {
-        XCTAssertEqual(dataTaskCallCount, 1, "call count")
-        XCTAssertEqual(dataTaskArgsRequest.first, request, "request")
+    func verifyDataTask(with request: URLRequest, file: StaticString = #file, line: UInt = #line) {
+        XCTAssertEqual(dataTaskCallCount, 1, "call count", file: file, line: line)
+        XCTAssertEqual(dataTaskArgsRequest.first, request, "request", file: file, line: line)
     }
     
 }
