@@ -19,7 +19,13 @@ class MockUrlSession: URLSessionProtocol {
     ) -> URLSessionDataTask {
         dataTaskCallCount += 1
         dataTaskArgsRequest.append(request)
-        return URLSessionDataTask()
+        return DummyUrlSessionDataTask()
     }
     
+}
+
+private class DummyUrlSessionDataTask: URLSessionDataTask {
+    override func resume() {
+        // do nothing
+    }
 }
