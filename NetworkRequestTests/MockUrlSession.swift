@@ -34,11 +34,11 @@ class MockUrlSession: URLSessionProtocol {
     private func dataTaskWasCalledOnce(file: StaticString, line: UInt) -> Bool {
         verifyMethodCallOnce(methodName: "dataTask(with:completionHandler:)", callCount: dataTaskCallCount, describeArgument: "request: \(dataTaskArgsRequest)", namedFile: file, line: line)
     }
-}
-
-private class DummyUrlSessionDataTask: URLSessionDataTask {
-    override func resume() {
-        // do nothing
+    
+    private class DummyUrlSessionDataTask: URLSessionDataTask {
+        override func resume() {
+            // do nothing
+        }
     }
 }
 
