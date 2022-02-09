@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import XCTest
 @testable import NetworkRequest
 
 class MockUrlSession: URLSessionProtocol {
@@ -20,6 +21,11 @@ class MockUrlSession: URLSessionProtocol {
         dataTaskCallCount += 1
         dataTaskArgsRequest.append(request)
         return DummyUrlSessionDataTask()
+    }
+    
+    func verifyDataTask(with request: URLRequest) {
+        XCTAssertEqual(dataTaskCallCount, 1, "call count")
+        XCTAssertEqual(dataTaskArgsRequest.first, request, "request")
     }
     
 }
