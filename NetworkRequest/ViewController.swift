@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     
     private var dataTask: URLSessionDataTask?
     
-    var session: URLSessionProtocol = URLSession.shared
+    var session: URLSessionProtocol = URLSession.shared 
     
     override func viewDidLoad() {
         super.viewDidLoad()
