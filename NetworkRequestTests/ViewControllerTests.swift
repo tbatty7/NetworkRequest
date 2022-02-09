@@ -12,7 +12,7 @@ final class ViewControllerTests: XCTestCase {
         
         tap(viewController.button)
         
-        XCTAssertEqual(mockUrlSession.dataTaskCallCount, 1)
-        
+        XCTAssertEqual(mockUrlSession.dataTaskCallCount, 1, "call count")
+        XCTAssertEqual(mockUrlSession.dataTaskArgsRequest.first, URLRequest(url: URL(string: "https://itunes.apple.com/search?mediaType=book&term=out%20from%20boneville")!), "request")
     }
 }
