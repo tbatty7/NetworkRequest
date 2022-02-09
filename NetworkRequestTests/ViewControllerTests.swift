@@ -12,6 +12,9 @@ final class ViewControllerTests: XCTestCase {
         
         tap(viewController.button)
         
+        let expectedUrl = URL(string: "https://itunes.apple.com/search")!
+        mockUrlSession.verifyDataTask(with: expectedUrl, queryList: ["term=out%20from%20boneville", "mediaType=book"])
+        
         let expectedRequest = URLRequest(url: URL(string: "https://itunes.apple.com/search?mediaType=book&term=out%20from%20boneville")!)
         mockUrlSession.verifyDataTask(with: expectedRequest)
     }

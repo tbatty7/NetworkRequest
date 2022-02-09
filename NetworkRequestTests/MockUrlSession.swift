@@ -28,7 +28,23 @@ class MockUrlSession: URLSessionProtocol {
             return
         }
         
+        XCTAssertEqual(dataTaskArgsRequest.first?.url?.query?.contains("mediaType=book"), true)
         XCTAssertEqual(dataTaskArgsRequest.first, request, "request", file: file, line: line)
+    }
+    
+    func verifyDataTask(with url: URL, queryList : [String], file: StaticString = #file, line: UInt = #line) {
+        guard dataTaskWasCalledOnce(file: file, line: line) else  {
+            return
+        }
+        
+        let actualUrl: URL? = dataTaskArgsRequest.first?.url
+        XCTAssertEqual(actualUrl?.scheme, url.scheme)
+        XCTAssertEqual(actualUrl?.host, url.host)
+        XCTAssertEqual(actualUrl?.path, url.path)
+        
+        for query in queryList {
+            XCTAssertEqual(actualUrl?.query?.contains(query), true, "Query parameter \(query) not found", file: file, line: line)
+        }
     }
     
     private func dataTaskWasCalledOnce(file: StaticString, line: UInt) -> Bool {
