@@ -2,12 +2,7 @@
 import XCTest
 
 final class ViewControllerTests: XCTestCase {
-    
-    private func createViewController() -> ViewController {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        return storyboard.instantiateViewController(identifier: String(describing: ViewController.self))
-    }
-    
+
     func test_assertOneRequestSentWithQueryParamsInSpecificOrder() throws {
         let viewController: ViewController = createViewController()
         let mockUrlSession: MockUrlSession = setUpMock(viewController)
@@ -31,11 +26,19 @@ final class ViewControllerTests: XCTestCase {
     func test_searchForBookNetworkCall_withSuccessResponse_shouldSaveDataInResults() {
         let viewController: ViewController = createViewController()
         let spyUrlSession: SpyUrlSession = setUpSpy(viewController)
+        let handleResultsCalled = expectation(description: "handleResults called")
+        viewController.handleResults = { _ in handleResultsCalled.fulfill() }
         
         tap(viewController.button)
+        spyUrlSession.dataTaskArgsCompletionHandler.first?(jsonData(), response(statusCode: 200), nil)
+        waitForExpectations(timeout: 0.01)
         
-        let expectedRequest = URLRequest(url: URL(string: "https://itunes.apple.com/search?mediaType=book&term=out%20from%20boneville")!)
-        //        mockUrlSession.verifyDataTask(with: expectedUrl, queryList: ["term=out%20from%20boneville", "mediaType=book"])
+        XCTAssertEqual(viewController.results, [SearchResult(artistName: "Artist", trackName: "Track", collectionPrice: 2.5, primaryGenreName: "Rock")])
+    }
+    
+    private func createViewController() -> ViewController {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        return storyboard.instantiateViewController(identifier: String(describing: ViewController.self))
     }
     
     private func jsonData() -> Data {
@@ -51,5 +54,9 @@ final class ViewControllerTests: XCTestCase {
             ]
         }
         """.data(using: .utf8)!
+    }
+    
+    private func response(statusCode: Int) -> HTTPURLResponse? {
+        HTTPURLResponse(url: URL(string: "http://food.com")!, statusCode: statusCode, httpVersion: nil, headerFields: nil)
     }
 }

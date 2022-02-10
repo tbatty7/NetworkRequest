@@ -11,7 +11,10 @@ class ViewController: UIViewController {
     @IBOutlet private(set) var button: UIButton!
     
     private var dataTask: URLSessionDataTask?
-    private(set) var results: [SearchResult] = [] { didSet { print (results) }}
+    private(set) var results: [SearchResult] = [] {
+        didSet { handleResults(results) }
+    }
+    var handleResults: ([SearchResult]) -> Void = { print($0)}
     
     var session: URLSessionProtocol = URLSession.shared
     
