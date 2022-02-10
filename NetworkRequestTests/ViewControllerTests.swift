@@ -36,6 +36,17 @@ final class ViewControllerTests: XCTestCase {
         XCTAssertEqual(viewController.results, [SearchResult(artistName: "Artist", trackName: "Track", collectionPrice: 2.5, primaryGenreName: "Rock")])
     }
     
+    func test_searchForBookNetworkCall_withSuccessResponse_shouldNotSaveDataInResults() {
+        let viewController: ViewController = createViewController()
+        let spyUrlSession: SpyUrlSession = setUpSpy(viewController)
+                
+        tap(viewController.button)
+
+        spyUrlSession.dataTaskArgsCompletionHandler.first?(jsonData(), response(statusCode: 200), nil)
+        
+        XCTAssertEqual(viewController.results, [])
+    }
+                
     private func createViewController() -> ViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         return storyboard.instantiateViewController(identifier: String(describing: ViewController.self))
