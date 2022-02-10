@@ -16,6 +16,7 @@
 		225937D827B4118300E3A1D6 /* MockUrlSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225937D727B4118300E3A1D6 /* MockUrlSession.swift */; };
 		225937DB27B4139300E3A1D6 /* ViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225937DA27B4139300E3A1D6 /* ViewControllerTests.swift */; };
 		225937DD27B414A100E3A1D6 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225937DC27B414A100E3A1D6 /* TestHelpers.swift */; };
+		2263CC4927B5725F0071488E /* SpyUrlSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2263CC4827B5725F0071488E /* SpyUrlSession.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		225937D727B4118300E3A1D6 /* MockUrlSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUrlSession.swift; sourceTree = "<group>"; };
 		225937DA27B4139300E3A1D6 /* ViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerTests.swift; sourceTree = "<group>"; };
 		225937DC27B414A100E3A1D6 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
+		2263CC4827B5725F0071488E /* SpyUrlSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyUrlSession.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				225937D727B4118300E3A1D6 /* MockUrlSession.swift */,
 				225937DA27B4139300E3A1D6 /* ViewControllerTests.swift */,
 				225937DC27B414A100E3A1D6 /* TestHelpers.swift */,
+				2263CC4827B5725F0071488E /* SpyUrlSession.swift */,
 			);
 			path = NetworkRequestTests;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				225937DB27B4139300E3A1D6 /* ViewControllerTests.swift in Sources */,
+				2263CC4927B5725F0071488E /* SpyUrlSession.swift in Sources */,
 				225937D827B4118300E3A1D6 /* MockUrlSession.swift in Sources */,
 				225937DD27B414A100E3A1D6 /* TestHelpers.swift in Sources */,
 			);
