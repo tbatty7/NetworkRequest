@@ -37,7 +37,7 @@ final class ViewControllerTests: XCTestCase {
         XCTAssertEqual(viewController.results, [SearchResult(artistName: "Artist", trackName: "Track", collectionPrice: 2.5, primaryGenreName: "Rock")])
     }
     
-    func test_searchForBookNetworkCall_withSuccessResponse_wihtoutWait_shouldNotSaveDataInResults() {
+    func test_searchForBookNetworkCall_withSuccessResponse_withoutWait_shouldNotSaveDataInResults() {
         let viewController: ViewController = createViewController()
         let spyUrlSession: SpyUrlSession = setUpSpy(viewController)
                 
@@ -93,6 +93,40 @@ final class ViewControllerTests: XCTestCase {
         spyUrlSession.dataTaskArgsCompletionHandler.first?(nil, nil, TestError(message: "Oh no!"))
         
         XCTAssertEqual(alertVerifier.presentedCount, 0)
+    }
+    
+    func test_assertButtonIsDisabledAfterTap() throws {
+        let viewController: ViewController = createViewController()
+        let mockUrlSession: MockUrlSession = setUpMock(viewController)
+        
+        XCTAssertTrue(viewController.button.isEnabled)
+        
+        tap(viewController.button)
+                
+        XCTAssertFalse(viewController.button.isEnabled)
+    }
+    
+    func test_searchForBookNetworkCall_withSuccessResponse_shouldEnableButtonAgain() {
+        let viewController: ViewController = createViewController()
+        let spyUrlSession: SpyUrlSession = setUpSpy(viewController)
+        let handleResultsCalled = expectation(description: "handleResults called")
+        viewController.handleResults = { _ in handleResultsCalled.fulfill() }
+        
+        tap(viewController.button)
+        spyUrlSession.dataTaskArgsCompletionHandler.first?(jsonData(), response(statusCode: 200), nil)
+        waitForExpectations(timeout: 0.01)
+        
+        XCTAssertTrue(viewController.button.isEnabled)
+    }
+    
+    func test_searchForBookNetworkCall_withSuccessResponse_withoutWait_shouldNotEnableButton() {
+        let viewController: ViewController = createViewController()
+        let spyUrlSession: SpyUrlSession = setUpSpy(viewController)
+        
+        tap(viewController.button)
+        spyUrlSession.dataTaskArgsCompletionHandler.first?(jsonData(), response(statusCode: 200), nil)
+
+        XCTAssertFalse(viewController.button.isEnabled)
     }
                 
     private func createViewController() -> ViewController {
