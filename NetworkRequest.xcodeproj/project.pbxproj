@@ -19,6 +19,7 @@
 		2263CC4927B5725F0071488E /* SpyUrlSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2263CC4827B5725F0071488E /* SpyUrlSession.swift */; };
 		E3E1297B27B5A9FE00F52D88 /* ViewControllerPresentationSpy.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E1297A27B5A9FE00F52D88 /* ViewControllerPresentationSpy.xcframework */; };
 		E3E1297D27B5AA3C00F52D88 /* ViewControllerPresentationSpy.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E3E1297A27B5A9FE00F52D88 /* ViewControllerPresentationSpy.xcframework */; };
+		E3E1297F27B5AD4200F52D88 /* TestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E1297E27B5AD4200F52D88 /* TestError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		225937DC27B414A100E3A1D6 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		2263CC4827B5725F0071488E /* SpyUrlSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyUrlSession.swift; sourceTree = "<group>"; };
 		E3E1297A27B5A9FE00F52D88 /* ViewControllerPresentationSpy.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = ViewControllerPresentationSpy.xcframework; sourceTree = "<group>"; };
+		E3E1297E27B5AD4200F52D88 /* TestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 				225937DA27B4139300E3A1D6 /* ViewControllerTests.swift */,
 				225937DC27B414A100E3A1D6 /* TestHelpers.swift */,
 				2263CC4827B5725F0071488E /* SpyUrlSession.swift */,
+				E3E1297E27B5AD4200F52D88 /* TestError.swift */,
 			);
 			path = NetworkRequestTests;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				225937DB27B4139300E3A1D6 /* ViewControllerTests.swift in Sources */,
+				E3E1297F27B5AD4200F52D88 /* TestError.swift in Sources */,
 				2263CC4927B5725F0071488E /* SpyUrlSession.swift in Sources */,
 				225937D827B4118300E3A1D6 /* MockUrlSession.swift in Sources */,
 				225937DD27B414A100E3A1D6 /* TestHelpers.swift in Sources */,

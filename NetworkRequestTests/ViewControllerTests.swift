@@ -1,5 +1,6 @@
 @testable import NetworkRequest
 import XCTest
+import ViewControllerPresentationSpy
 
 final class ViewControllerTests: XCTestCase {
 
@@ -36,7 +37,7 @@ final class ViewControllerTests: XCTestCase {
         XCTAssertEqual(viewController.results, [SearchResult(artistName: "Artist", trackName: "Track", collectionPrice: 2.5, primaryGenreName: "Rock")])
     }
     
-    func test_searchForBookNetworkCall_withSuccessResponse_shouldNotSaveDataInResults() {
+    func test_searchForBookNetworkCall_withSuccessResponse_wihtoutWait_shouldNotSaveDataInResults() {
         let viewController: ViewController = createViewController()
         let spyUrlSession: SpyUrlSession = setUpSpy(viewController)
                 
@@ -46,10 +47,41 @@ final class ViewControllerTests: XCTestCase {
         
         XCTAssertEqual(viewController.results, [])
     }
+    
+    func test_searchForBookNetworkCall_withFailureResponse_shouldShowTheAlert() {
+        let viewController: ViewController = createViewController()
+        let spyUrlSession: SpyUrlSession = setUpSpy(viewController)
+        let alertVerifier: AlertVerifier = createAlertVerifierForAsync()
+        
+        tap(viewController.button)
+        spyUrlSession.dataTaskArgsCompletionHandler.first?(nil, nil, TestError(message: "Oh no!"))
+        waitForExpectations(timeout: 0.01)
+        
+        verifyErrorAlert(verifier: alertVerifier, viewController: viewController, message: "Oh no!")
+    }
+    
+    func test_searchForBookNetworkCall_withFailureResponse_withoutWait_shouldNotShowTheAlert() {
+        let viewController: ViewController = createViewController()
+        let spyUrlSession: SpyUrlSession = setUpSpy(viewController)
+        let alertVerifier: AlertVerifier = AlertVerifier()
+        
+        tap(viewController.button)
+        spyUrlSession.dataTaskArgsCompletionHandler.first?(nil, nil, TestError(message: "Oh no!"))
+        
+        XCTAssertEqual(alertVerifier.presentedCount, 0)
+    }
                 
     private func createViewController() -> ViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         return storyboard.instantiateViewController(identifier: String(describing: ViewController.self))
+    }
+    
+    private func createAlertVerifierForAsync() -> AlertVerifier {
+        let alertVerifier = AlertVerifier()
+        let alertShown = expectation(description: "alert shown")
+        alertVerifier.testCompletion = { alertShown.fulfill() }
+        
+        return alertVerifier
     }
     
     private func jsonData() -> Data {
@@ -69,5 +101,11 @@ final class ViewControllerTests: XCTestCase {
     
     private func response(statusCode: Int) -> HTTPURLResponse? {
         HTTPURLResponse(url: URL(string: "http://food.com")!, statusCode: statusCode, httpVersion: nil, headerFields: nil)
+    }
+    
+    private func verifyErrorAlert(verifier: AlertVerifier, viewController : ViewController, message: String, file: StaticString = #file, line: UInt = #line) {
+        verifier.verify(title: "Network Problem", message: message, animated: true, actions: [.default("OK")], presentingViewController: viewController, file: file, line: line)
+        
+        XCTAssertEqual(verifier.preferredAction?.title, "OK", "preferred action", file: file, line: line)
     }
 }
