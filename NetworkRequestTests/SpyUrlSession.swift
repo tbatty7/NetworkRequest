@@ -27,3 +27,10 @@ class SpyUrlSession: URLSessionProtocol {
         return DummyUrlSessionDataTask()
     }
 }
+
+func setUpSpy(_ viewController: ViewController) -> SpyUrlSession {
+    let spyUrlSession = SpyUrlSession()
+    viewController.session = spyUrlSession
+    viewController.loadViewIfNeeded()
+    return spyUrlSession
+}
