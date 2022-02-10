@@ -47,10 +47,6 @@ class ViewController: UIViewController {
         button.isEnabled = false
         dataTask?.resume()
     }
-    
-    deinit {
-        print(">>>>>>>>>>>> Tearing down ViewController")
-    }
 }
 
 extension URLSession: URLSessionProtocol {}
@@ -58,3 +54,13 @@ protocol URLSessionProtocol {
     func dataTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask
 }
 
+struct Search: Decodable {
+    let results: [SearchResult]
+}
+
+struct SearchResult: Decodable, Equatable {
+    let artistName: String
+    let trackName: String
+    let collectionPrice: Float
+    let primaryGenreName: String
+}
