@@ -60,6 +60,30 @@ final class ViewControllerTests: XCTestCase {
         verifyErrorAlert(verifier: alertVerifier, viewController: viewController, message: "Oh no!")
     }
     
+    func test_searchForBookNetworkCall_withMalformedData_shouldNotShowTheAlert() {
+        let viewController: ViewController = createViewController()
+        let spyUrlSession: SpyUrlSession = setUpSpy(viewController)
+        let alertVerifier: AlertVerifier = createAlertVerifierForAsync()
+        
+        tap(viewController.button)
+        spyUrlSession.dataTaskArgsCompletionHandler.first?("{ dfkadsfkj }".data(using: .utf8), response(statusCode: 200), nil)
+        waitForExpectations(timeout: 0.01)
+        
+        verifyErrorAlert(verifier: alertVerifier, viewController: viewController, message: "The data couldn’t be read because it isn’t in the correct format.")
+    }
+    
+    func test_searchForBookNetworkCall_withInternalServerErrorResponse_shouldNotShowTheAlert() {
+        let viewController: ViewController = createViewController()
+        let spyUrlSession: SpyUrlSession = setUpSpy(viewController)
+        let alertVerifier: AlertVerifier = createAlertVerifierForAsync()
+        
+        tap(viewController.button)
+        spyUrlSession.dataTaskArgsCompletionHandler.first?("{}".data(using: .utf8), response(statusCode: 500), nil)
+        waitForExpectations(timeout: 0.01)
+        
+        verifyErrorAlert(verifier: alertVerifier, viewController: viewController, message: "Response: internal server error")
+    }
+    
     func test_searchForBookNetworkCall_withFailureResponse_withoutWait_shouldNotShowTheAlert() {
         let viewController: ViewController = createViewController()
         let spyUrlSession: SpyUrlSession = setUpSpy(viewController)
