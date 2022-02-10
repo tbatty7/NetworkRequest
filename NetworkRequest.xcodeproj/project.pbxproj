@@ -17,6 +17,8 @@
 		225937DB27B4139300E3A1D6 /* ViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225937DA27B4139300E3A1D6 /* ViewControllerTests.swift */; };
 		225937DD27B414A100E3A1D6 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225937DC27B414A100E3A1D6 /* TestHelpers.swift */; };
 		2263CC4927B5725F0071488E /* SpyUrlSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2263CC4827B5725F0071488E /* SpyUrlSession.swift */; };
+		E3E1297B27B5A9FE00F52D88 /* ViewControllerPresentationSpy.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E1297A27B5A9FE00F52D88 /* ViewControllerPresentationSpy.xcframework */; };
+		E3E1297D27B5AA3C00F52D88 /* ViewControllerPresentationSpy.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E3E1297A27B5A9FE00F52D88 /* ViewControllerPresentationSpy.xcframework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +30,19 @@
 			remoteInfo = NetworkRequest;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E3E1297C27B5AA2500F52D88 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				E3E1297D27B5AA3C00F52D88 /* ViewControllerPresentationSpy.xcframework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		223770C027B3199F002AEF11 /* NetworkRequest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetworkRequest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -43,6 +58,7 @@
 		225937DA27B4139300E3A1D6 /* ViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerTests.swift; sourceTree = "<group>"; };
 		225937DC27B414A100E3A1D6 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		2263CC4827B5725F0071488E /* SpyUrlSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyUrlSession.swift; sourceTree = "<group>"; };
+		E3E1297A27B5A9FE00F52D88 /* ViewControllerPresentationSpy.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = ViewControllerPresentationSpy.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3E1297B27B5A9FE00F52D88 /* ViewControllerPresentationSpy.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,6 +115,7 @@
 		223770D927B319A0002AEF11 /* NetworkRequestTests */ = {
 			isa = PBXGroup;
 			children = (
+				E3E1297A27B5A9FE00F52D88 /* ViewControllerPresentationSpy.xcframework */,
 				225937D727B4118300E3A1D6 /* MockUrlSession.swift */,
 				225937DA27B4139300E3A1D6 /* ViewControllerTests.swift */,
 				225937DC27B414A100E3A1D6 /* TestHelpers.swift */,
@@ -133,6 +151,7 @@
 				223770D227B319A0002AEF11 /* Sources */,
 				223770D327B319A0002AEF11 /* Frameworks */,
 				223770D427B319A0002AEF11 /* Resources */,
+				E3E1297C27B5AA2500F52D88 /* CopyFiles */,
 			);
 			buildRules = (
 			);
