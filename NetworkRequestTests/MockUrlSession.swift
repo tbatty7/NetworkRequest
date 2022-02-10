@@ -71,3 +71,10 @@ func verifyMethodCallOnce(methodName: String, callCount: Int, describeArgument: 
     
     return true
 }
+
+func setUpMock(_ viewController: ViewController) -> MockUrlSession {
+    let mockUrlSession = MockUrlSession()
+    viewController.session = mockUrlSession
+    viewController.loadViewIfNeeded()
+    return mockUrlSession
+}

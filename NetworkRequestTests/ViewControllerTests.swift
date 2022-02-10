@@ -8,13 +8,6 @@ final class ViewControllerTests: XCTestCase {
         return storyboard.instantiateViewController(identifier: String(describing: ViewController.self))
     }
     
-    private func setUpMock(_ viewController: ViewController) -> MockUrlSession {
-        let mockUrlSession = MockUrlSession()
-        viewController.session = mockUrlSession
-        viewController.loadViewIfNeeded()
-        return mockUrlSession
-    }
-    
     func test_assertOneRequestSentWithQueryParamsInSpecificOrder() throws {
         let viewController: ViewController = createViewController()
         let mockUrlSession: MockUrlSession = setUpMock(viewController)
