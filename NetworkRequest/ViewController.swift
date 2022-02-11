@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     private(set) var results: [SearchResult] = [] {
         didSet { handleResults(results) }
     }
-    var handleResults: ([SearchResult]) -> Void = { print($0)}
+    var handleResults: ([SearchResult]) -> Void = { searchResults in print(">>>>> from handleResults -> \(searchResults[0])")}
     
     var session: URLSessionProtocol = URLSession.shared
     
